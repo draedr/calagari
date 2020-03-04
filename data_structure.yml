@@ -1,0 +1,110 @@
+Event:
+    name: String
+    description:
+        content: Text
+        mediatype: String
+    contact:
+        info: Text
+        url: String
+        mail: String
+        phone: String
+    times: [Day]
+    location: Venue
+    tags: [Tag]
+    booking:
+        bookings: [Booking]
+        booking_info: Text
+        sposts: Number
+        enabled: Boolean
+        limited_spots: Boolean
+        per_day: Boolean
+        start_booking: Datetime
+        end_booking: Datetime
+        different_spots_per_day: Boolean
+        booking_time_slot: Boolean
+        time_slot_per_day: Boolean
+        has_to_be_accepted: Boolean
+
+Day:
+    event: Event
+    start: Datetime
+    end: Datetime
+    info: Text
+    booking:
+        bookings: [Booking]
+        booking_info: Text
+        sposts: Number
+        start_booking: Datetime
+        end_booking: Datetime
+
+Booking:
+    event: Event
+    day: Day
+    user: User
+    additional_info: Text
+    status: {
+            PENDING, 
+            REFUSED, 
+            ACCEPTED
+        }
+
+Tag:
+    slug: String
+    name: String
+
+Venue:
+    name: String
+    description:
+        content: Text
+        mediatype: String
+    contact:
+        info: Text
+        url: String
+        mail: String
+        phone: String
+    location:
+        address: String
+        lat: Float
+        lng: Float
+        global_plus_code: String
+    tags: [Tag]
+
+    Tag_to_Venue:
+        venue: Venue
+        tag: Tag
+
+TagtoVenue:
+    venue: Venue
+    tag: Tag
+    
+TagtoEvent:
+    venue: Venue
+    tag: Tag
+
+Profile:
+    user: User
+    username: String
+    avatar: Buffer
+    info: Text
+    permissions: {
+        "create_event",
+        "approve_event",
+        "update_event",
+        "delete_event",
+
+        "create_venue",
+        "approve_venue",
+        "update_venue",
+        "delete_venue",
+        
+        "create_tag",
+        "approve_tag",
+        "update_tag",
+        "delete_tag",
+        
+        "approve_booking",
+
+        "promote_user",
+        "ban_user",
+        "delete_user"
+    }
